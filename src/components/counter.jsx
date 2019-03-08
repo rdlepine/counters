@@ -23,15 +23,25 @@ class Counter extends Component {
    
     render() { 
 
-        const {onDelete, counter} = this.props
+        const {onDelete, onIncrement,counter, onDecrement} = this.props
         
         return ( 
-            <div>
+            <div className="row">
                 <h4>{this.props.counter._id}</h4>
-               
-                <span className={this.getBatchClasses()}>{this.formatCount()}</span>
-                <button onClick={() => this.props.onIncrement(counter)} className="btn btn-secondary btn-sm">Increment</button>
-                <button onClick={() => onDelete(this.props.counter._id)} className="btn btn-danger btn-sm m-2">Decrement</button>
+  
+                <div className="col-1">
+                    <span className={this.getBatchClasses()}>{this.formatCount()}</span>
+                </div>
+                <div className="col">
+                    <button onClick={() => onIncrement(counter)} 
+                            className="btn btn-secondary btn-sm m-2">+</button>
+                    <button onClick={() => onDecrement(counter)} disabled={counter.value === 0} 
+                            className="btn btn-secondary btn-sm m-2">-</button>
+                    <button onClick={() => onDelete(this.props.counter._id)} 
+                            className="btn btn-danger btn-sm">X</button>
+                    </div>
+                
+ 
             </div>
          )
 

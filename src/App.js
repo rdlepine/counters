@@ -56,15 +56,36 @@ class App extends Component {
 
   }
 
+
+  decrementCounter = (counter) => {
+    const counters = [...this.state.counters]
+
+    // this.setState({counters: counters.map( (count) => {
+    //   if(counter._id === count._id) {
+    //     count.value += 1;
+    //   }
+    //   return count;
+    // })})
+
+    const index = counters.indexOf(counter)
+    counters[index] = {...counter}
+    counters[index].value--;
+    this.setState({counters})
+
+  }
+
   render() {
 
+    console.log("Render")
     const {counters} = this.state
   
     return (
       <React.Fragment>
         <NavBar totalCount={counters.filter(c => c.value > 0).length}/>
         <main className="container">
-          <Counters onReset={this.handleReset}  onIncrement={this.handleIncrement} counters={counters} onDelete={this.updateCounter}/>
+          <Counters onReset={this.handleReset}  onIncrement={this.handleIncrement}
+                    counters={counters} onDelete={this.updateCounter}
+                    onDecrement={this.decrementCounter} />
         </main>
       </React.Fragment>
     );
